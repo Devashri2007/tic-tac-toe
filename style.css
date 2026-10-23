@@ -1,0 +1,68 @@
+:root{
+  --bg:#1b1744; --bg2:#2a2566; --tile:#342d7a; --tile-hover:#3f378f;
+  --x:#ff5c8a; --o:#3de0c5; --gold:#ffd166; --text:#f4f2ff; --muted:#a9a4d8;
+}
+*{box-sizing:border-box;margin:0}
+body{
+  min-height:100vh;display:grid;place-items:center;padding:16px;
+  font-family:'Fredoka',system-ui,sans-serif;color:var(--text);
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255,92,138,.22), transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(61,224,197,.2), transparent 40%),
+    var(--bg);
+}
+.card{
+  width:min(420px,100%);background:var(--bg2);border-radius:28px;padding:28px 24px;
+  box-shadow:0 24px 60px rgba(0,0,0,.45), inset 0 0 0 2px rgba(255,255,255,.06);
+}
+.screen{display:none}.screen.active{display:block}
+.logo{font-size:2rem;text-align:center;font-weight:700;letter-spacing:.5px}
+.logo .x{color:var(--x)}.logo .o{color:var(--o);margin-right:10px}
+.sub{text-align:center;color:var(--muted);margin:6px 0 20px}
+
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:var(--bg);padding:6px;border-radius:16px;margin-bottom:18px}
+.modes button{font:inherit;font-weight:500;padding:11px;border:0;border-radius:12px;background:transparent;color:var(--muted);cursor:pointer;transition:.2s}
+.modes button.active{background:var(--gold);color:#3a2a00;font-weight:700}
+.modes.small{margin:6px 0 0}
+
+.field{display:block;margin-bottom:14px}
+.field>span{display:block;font-size:.9rem;color:var(--muted);margin-bottom:6px}
+.field input{width:100%;font:inherit;font-size:1.1rem;padding:12px 14px;border-radius:14px;border:2px solid transparent;background:var(--bg);color:var(--text);outline:none;transition:.2s}
+.x-field input:focus{border-color:var(--x)}
+.o-field input:focus{border-color:var(--o)}
+[hidden]{display:none!important}
+
+.primary,.ghost{font:inherit;font-weight:700;font-size:1.05rem;border:0;border-radius:16px;padding:14px;width:100%;cursor:pointer;transition:transform .15s, filter .2s}
+.primary{background:linear-gradient(135deg,var(--x),#ff8e5c);color:#fff;margin-top:6px}
+.ghost{background:var(--bg);color:var(--text)}
+.primary:hover,.ghost:hover{filter:brightness(1.1)}
+.primary:active,.ghost:active{transform:scale(.97)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+.scores{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px}
+.score{background:var(--bg);border-radius:16px;padding:10px 6px;text-align:center;border:2px solid transparent;transition:.25s}
+.score b{display:block;font-size:.85rem;font-weight:500;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.score em{font-style:normal;font-size:1.7rem;font-weight:700}
+.x-score em{color:var(--x)}.o-score em{color:var(--o)}
+.score.turn.x-score{border-color:var(--x)}
+.score.turn.o-score{border-color:var(--o)}
+
+.status{text-align:center;font-size:1.2rem;font-weight:500;min-height:1.8em;margin-bottom:12px}
+
+.board-wrap{position:relative;width:100%;aspect-ratio:1}
+.board{display:grid;grid-template:repeat(3,1fr)/repeat(3,1fr);gap:10px;width:100%;height:100%}
+.cell{border:0;border-radius:18px;background:var(--tile);font:inherit;font-size:clamp(2.6rem,14vw,4.2rem);font-weight:700;cursor:pointer;transition:background .2s, transform .15s;color:var(--text)}
+.cell:not(:disabled):hover{background:var(--tile-hover);transform:scale(1.04)}
+.cell:disabled{cursor:default}
+.cell.x{color:var(--x)}.cell.o{color:var(--o)}
+.cell.pop{animation:pop .28s ease-out}
+.cell.win{background:rgba(255,209,102,.18);box-shadow:inset 0 0 0 3px var(--gold)}
+@keyframes pop{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
+
+.win-line{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.win-line line{stroke:var(--gold);stroke-width:7;stroke-linecap:round;stroke-dasharray:400;stroke-dashoffset:400;opacity:0}
+.win-line line.show{opacity:1;animation:draw .5s ease-out forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+.actions{display:grid;gap:10px;margin-top:18px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.win-line line.show{stroke-dashoffset:0}}

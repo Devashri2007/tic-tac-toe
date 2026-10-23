@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tic Tac Toe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="card">
+
+  <!-- SETUP SCREEN -->
+  <section id="setup" class="screen active">
+    <h1 class="logo"><span class="x">X</span><span class="o">O</span> Tic Tac Toe</h1>
+    <p class="sub">Pick a mode and enter your names.</p>
+
+    <div class="modes" role="tablist">
+      <button class="mode active" data-mode="pvp" role="tab">2 Players</button>
+      <button class="mode" data-mode="ai" role="tab">Vs AI</button>
+    </div>
+
+    <form id="setupForm" autocomplete="off">
+      <label class="field x-field">
+        <span>Player 1 (X)</span>
+        <input id="p1" maxlength="12" placeholder="Enter name" required>
+      </label>
+      <label class="field o-field" id="p2Field">
+        <span>Player 2 (O)</span>
+        <input id="p2" maxlength="12" placeholder="Enter name" required>
+      </label>
+      <div class="field" id="diffField" hidden>
+        <span>AI level</span>
+        <div class="modes small">
+          <button type="button" class="diff active" data-diff="easy">Easy</button>
+          <button type="button" class="diff" data-diff="hard">Unbeatable</button>
+        </div>
+      </div>
+      <button class="primary" type="submit">Start game</button>
+    </form>
+  </section>
+
+  <!-- GAME SCREEN -->
+  <section id="game" class="screen">
+    <div class="scores">
+      <div class="score x-score" id="sx"><b id="nameX">X</b><em id="scoreX">0</em></div>
+      <div class="score draw-score"><b>Draws</b><em id="scoreD">0</em></div>
+      <div class="score o-score" id="so"><b id="nameO">O</b><em id="scoreO">0</em></div>
+    </div>
+
+    <p id="status" class="status" aria-live="polite"></p>
+
+    <div class="board-wrap">
+      <div id="board" class="board"></div>
+      <svg id="line" class="win-line" viewBox="0 0 300 300"><line id="lineEl" x1="0" y1="0" x2="0" y2="0"/></svg>
+    </div>
+
+    <div class="actions">
+      <button id="again" class="primary">Play again</button>
+      <button id="menu" class="ghost">Change players</button>
+    </div>
+  </section>
+
+</main>
+<script src="script.js"></script>
+</body>
+</html>
